@@ -133,9 +133,34 @@ WorkTicket WorkTicket::operator=(const WorkTicket& ticket2)
 	SetWorkTicket(ticket2.GetWorkTicketNumber(), ticket2.GetClientID(), ticket2.GetWorkTicketDay(),
 	              ticket2.GetWorkTicketMonth(), ticket2.GetWorkTicketYear(), ticket2.GetWorkTicketDescription());
 
+	std::cout << "\nA WorkTicket object was ASSIGNED. \n";
+
 	return *this;
 }
 
+std::istream& operator>>(std::istream& in, WorkTicket& ticket)
+{
+	in >> ticket.workTicketNumber;
+	in.ignore();
+	in >> ticket.clientID;
+	in.ignore();
+	in >> ticket.workTicketDay;
+	in.ignore();
+	in >> ticket.workTicketMonth;
+	in.ignore();
+	in >> ticket.workTicketYear;
+	in.ignore();
+	in >> ticket.workTicketDescription;
+
+
+	return in;
+}
+
+std::ostream& operator<<(std::ostream& out, const WorkTicket& ticket)
+{
+	out << ticket.ToString();
+	return out;
+}
 
 
 // Output Ticket Information

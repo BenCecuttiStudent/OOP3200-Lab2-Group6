@@ -50,6 +50,8 @@ public:
 	/* Operator Overloads */
 	bool operator== (const WorkTicket& ticket2) const;
 	WorkTicket operator= (const WorkTicket& ticket2);
+	friend std::istream& operator>>(std::istream& in, WorkTicket& ticket);
+	friend std::ostream& operator<<(std::ostream& out, const WorkTicket& ticket);
 
 	/* Utility */
 	void ShowWorkTicket() const;
