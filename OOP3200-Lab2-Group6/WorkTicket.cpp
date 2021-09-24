@@ -17,8 +17,8 @@ WorkTicket::WorkTicket(int work_ticket_number, const std::string& client_id, int
 	              work_ticket_description);
 }
 
+// Deconstructor
 WorkTicket::~WorkTicket() = default;
-
 
 // Copy Constructor
 WorkTicket::WorkTicket(const WorkTicket& ticket2)
@@ -28,7 +28,8 @@ WorkTicket::WorkTicket(const WorkTicket& ticket2)
 	std::cout << "\nA WorkTicket object was COPIED. \n";
 }
 
-// Getters
+
+/* ACCESSORS */
 int WorkTicket::GetWorkTicketNumber() const { return workTicketNumber; }
 
 std::string WorkTicket::GetClientID() const { return clientID; }
@@ -41,7 +42,8 @@ int WorkTicket::GetWorkTicketMonth() const { return workTicketMonth; }
 
 int WorkTicket::GetWorkTicketYear() const { return workTicketYear; }
 
-// Setters
+
+/* MUTATORS*/
 void WorkTicket::SetWorkTicketNumber(int work_ticket_number) { workTicketNumber = work_ticket_number; }
 
 void WorkTicket::SetClientID(const std::string& client_id) { clientID = client_id; }
@@ -114,15 +116,27 @@ bool WorkTicket::SetWorkTicket(const int work_ticket_number, const std::string& 
 	}
 }
 
-bool WorkTicket::operator==(const WorkTicket& newTicket) const
+
+/* OPERATOR OVERLOADS */
+bool WorkTicket::operator==(const WorkTicket& ticket2) const
 {
-	return (GetWorkTicketNumber() == newTicket.GetWorkTicketNumber())
-			&& (GetClientID() == newTicket.GetClientID())
-			&& (GetWorkTicketDay() == newTicket.GetWorkTicketDay())
-			&& (GetWorkTicketMonth() == newTicket.GetWorkTicketMonth())
-			&& (GetWorkTicketYear() == newTicket.GetWorkTicketYear())
-			&& (GetWorkTicketDescription() == newTicket.GetWorkTicketDescription());
+	return (GetWorkTicketNumber() == ticket2.GetWorkTicketNumber())
+			&& (GetClientID() == ticket2.GetClientID())
+			&& (GetWorkTicketDay() == ticket2.GetWorkTicketDay())
+			&& (GetWorkTicketMonth() == ticket2.GetWorkTicketMonth())
+			&& (GetWorkTicketYear() == ticket2.GetWorkTicketYear())
+			&& (GetWorkTicketDescription() == ticket2.GetWorkTicketDescription());
 }
+
+WorkTicket WorkTicket::operator=(const WorkTicket& ticket2) 
+{
+	SetWorkTicket(ticket2.GetWorkTicketNumber(), ticket2.GetClientID(), ticket2.GetWorkTicketDay(),
+	              ticket2.GetWorkTicketMonth(), ticket2.GetWorkTicketYear(), ticket2.GetWorkTicketDescription());
+
+	return *this;
+}
+
+
 
 // Output Ticket Information
 void WorkTicket::ShowWorkTicket() const
@@ -155,8 +169,5 @@ std::string WorkTicket::ToString() const
 	temp.append(GetWorkTicketDescription());
 	temp.append("\n");
 
-	std::cout << temp;
 	return temp;
-
-	// Work Ticket # 2 - ABC123 (10/3/1012): User cannot locate 'any' key
 }

@@ -1,6 +1,6 @@
 #pragma once
-#ifndef WORK_TICKET_
-#define WORK_TICKET_
+#ifndef __WORK_TICKET__
+#define __WORK_TICKET__
 #include <string>
 
 class WorkTicket
@@ -48,7 +48,8 @@ public:
 	bool SetWorkTicket(const int work_ticket_number, const std::string& client_id, const int work_ticket_day, const int work_ticket_month, const int work_ticket_year, const std::string& work_ticket_description);
 	
 	/* Operator Overloads */
-	bool operator== (const WorkTicket& newTicket) const;
+	bool operator== (const WorkTicket& ticket2) const;
+	WorkTicket operator= (const WorkTicket& ticket2);
 
 	/* Utility */
 	void ShowWorkTicket() const;
