@@ -222,21 +222,6 @@ std::istream& operator>>(std::istream& in, WorkTicket& ticket)
 	{
 		std::cout << ex.what();
 	}
-	/*
-	std::cout << "Work Ticket Number:";
-	in >> ticket.workTicketNumber;
-	std::cout << "ClientID:";
-	in.ignore();
-	in >> ticket.clientID;
-	std::cout << "Work Ticket Date(dd mm yyyy):";
-	in.ignore();
-	in >> ticket.workTicketDay >> ticket.workTicketMonth >> ticket.workTicketYear;
-	in.ignore();
-	std::cout << "Description: ";
-	std::getline(in, ticket.workTicketDescription);
-	in.ignore();
-	return in;
-	*/
 }
 
 std::ostream& operator<<(std::ostream& out, const WorkTicket& ticket)
