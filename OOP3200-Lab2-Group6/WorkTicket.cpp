@@ -1,7 +1,7 @@
-// Name: WorkTicket.cpp
+// Name: Lab 2 - Class Operators and Data Type Conversions
 // Authors: Alexus Girotto(100727793) & 
 //         Ben Cecutti(100754039)
-// Date: September 15th 2021
+// Date: September 24th 2021
 
 #include "WorkTicket.h"
 #include <string>
@@ -69,7 +69,7 @@ bool WorkTicket::SetWorkTicket(const int work_ticket_number, const std::string& 
 		}
 		else
 		{
-			throw std::invalid_argument("Number must be greater or equal to 0");
+			throw std::invalid_argument("ERROR! Ticket number must be greater than 0\n");
 		}
 
 		if (client_id.length() > 0)
@@ -78,7 +78,7 @@ bool WorkTicket::SetWorkTicket(const int work_ticket_number, const std::string& 
 		}
 		else
 		{
-			throw std::invalid_argument("String must be at least one character");
+			throw std::invalid_argument("ERROR! ClientID must be at least one character");
 		}
 
 		if (work_ticket_day >= 1 && work_ticket_day <= 31)
@@ -87,7 +87,7 @@ bool WorkTicket::SetWorkTicket(const int work_ticket_number, const std::string& 
 		}
 		else
 		{
-			throw std::invalid_argument("Number must be between 1 and 31");
+			throw std::invalid_argument("ERROR! Day must be between 1 and 31");
 		}
 
 		if (work_ticket_month >= 1 && work_ticket_month <= 12)
@@ -96,7 +96,7 @@ bool WorkTicket::SetWorkTicket(const int work_ticket_number, const std::string& 
 		}
 		else
 		{
-			throw std::invalid_argument("Number must be between 1 and 12");
+			throw std::invalid_argument("ERROR! Month must be between 1 and 12");
 		}
 
 		if (work_ticket_year >= 2000 && work_ticket_year <= 2099)
@@ -105,7 +105,16 @@ bool WorkTicket::SetWorkTicket(const int work_ticket_number, const std::string& 
 		}
 		else
 		{
-			throw std::invalid_argument("Number must be between 2000 and 2099");
+			throw std::invalid_argument("ERROR! Year must be between 2000 and 2099");
+		}
+
+		if (work_ticket_description.length() > 0)
+		{
+			SetWorkTicketDescription(work_ticket_description);
+		}
+		else
+		{
+			throw std::invalid_argument("ERROR! Description must be at least one character");
 		}
 		return true;
 	}
@@ -140,20 +149,94 @@ WorkTicket WorkTicket::operator=(const WorkTicket& ticket2)
 
 std::istream& operator>>(std::istream& in, WorkTicket& ticket)
 {
+	int tmpNum;
+	int tmpNum2;
+	int tmpNum3;
+	std::string tmpString;
+	try
+	{
+		std::cout << "Work Ticket Number:";
+		in >> tmpNum;
+		if (tmpNum > 0)
+		{
+			ticket.workTicketNumber = tmpNum;
+		}
+		else
+		{
+			throw std::invalid_argument("ERROR! Ticket number must be greater than 0");
+		}
+
+		std::cout << "ClientID:";
+		in >> tmpString;
+		if (tmpString.length() > 0)
+		{
+			ticket.clientID = tmpString;
+		}
+		else
+		{
+			throw std::invalid_argument("ERROR! ClientID must be at least one character");
+		}
+
+		std::cout << "Work Ticket Date(dd mm yyyy):";
+		in >> tmpNum >> tmpNum2 >> tmpNum3;
+		if (tmpNum>= 1 && tmpNum <= 31)
+		{
+			ticket.workTicketDay = tmpNum;
+		}
+		else
+		{
+			throw std::invalid_argument("ERROR! Day must be between 1 and 31");
+		}
+
+		if (tmpNum2 >= 1 && tmpNum2 <= 12)
+		{
+			ticket.workTicketMonth = tmpNum2;
+		}
+		else
+		{
+			throw std::invalid_argument("ERROR! Month must be between 1 and 12");
+		}
+
+		if (tmpNum3 >= 2000 && tmpNum3 <= 2099)
+		{
+			ticket.workTicketYear = tmpNum3;
+		}
+		else
+		{
+			throw std::invalid_argument("ERROR! Year must be between 2000 and 2099");
+		}
+
+		in.ignore();
+		std::cout << "Description: ";
+		std::getline(in, tmpString);
+		if (tmpString.length() > 0)
+		{
+			ticket.workTicketDescription = tmpString;
+		}
+		else
+		{
+			throw std::invalid_argument("ERROR! Description must be at least one character");
+		}
+	}
+	catch (std::exception& ex)
+	{
+		std::cout << ex.what();
+	}
+	/*
+	std::cout << "Work Ticket Number:";
 	in >> ticket.workTicketNumber;
+	std::cout << "ClientID:";
 	in.ignore();
 	in >> ticket.clientID;
+	std::cout << "Work Ticket Date(dd mm yyyy):";
 	in.ignore();
-	in >> ticket.workTicketDay;
+	in >> ticket.workTicketDay >> ticket.workTicketMonth >> ticket.workTicketYear;
 	in.ignore();
-	in >> ticket.workTicketMonth;
+	std::cout << "Description: ";
+	std::getline(in, ticket.workTicketDescription);
 	in.ignore();
-	in >> ticket.workTicketYear;
-	in.ignore();
-	in >> ticket.workTicketDescription;
-
-
 	return in;
+	*/
 }
 
 std::ostream& operator<<(std::ostream& out, const WorkTicket& ticket)

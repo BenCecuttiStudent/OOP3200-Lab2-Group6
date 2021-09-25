@@ -1,3 +1,7 @@
+// Name: Lab 2 - Class Operators and Data Type Conversions
+// Authors: Alexus Girotto(100727793) & 
+//         Ben Cecutti(100754039)
+// Date: September 24th 2021
 #pragma once
 #ifndef __WORK_TICKET__
 #define __WORK_TICKET__

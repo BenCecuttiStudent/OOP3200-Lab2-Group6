@@ -1,12 +1,12 @@
-// Name: Main.cpp
+// Name: Lab 2 - Class Operators and Data Type Conversions
 // Authors: Alexus Girotto(100727793) & 
 //         Ben Cecutti(100754039)
-// Date: September 15th 2021
+// Date: September 24th 2021
 
 #include <iostream>
 #include "WorkTicket.h"
 
-void main()
+int main()
 {
 	int workTicketNumber = 0;
 	std::string clientID = " ";
@@ -18,41 +18,24 @@ void main()
 	std::cout << "Work Ticket Report Program"
 		<< "\n==========================";
 
-	WorkTicket WorkTicketArray[3];
+	// Existing Ticket
+	WorkTicket ticket1(13, "CecuttiB", 07, 12, 2021, "Fan is very loud");
 
-	for (int x = 0; x < 3;) // Loop 3 times for ticket input
-	{
-		std::cout << "\n\nTicket " << x + 1
-			<< "\n----------" << std::endl;
-		std::cout << "Ticket Number: ";
-		std::cin >> workTicketNumber;
-		std::cin.clear(); // Clear the buffer
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		std::cout << "ClientID: ";
-		std::cin >> clientID;
-		std::cin.clear(); // Clear the buffer
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		std::cout << "Ticket Date(dd mm yyyy): ";
-		std::cin >> workTicketDay;
-		std::cin >> workTicketMonth;
-		std::cin >> workTicketYear;
-		std::cin.clear(); // Clear the buffer so getline can work properly
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		std::cout << "Description: ";
-		std::getline(std::cin, workTicketDescription);
+	WorkTicket ticket2 = ticket1;
 
-		if (WorkTicketArray[x].SetWorkTicket(workTicketNumber, clientID, workTicketDay, workTicketMonth, workTicketYear, workTicketDescription))
-		{
-			x++;
-		}
-	}
+	// Typecast
+	std::cout << ticket2;
 
-	std::cout << "\nTicket Output" // Loop Ticket Output
-		<< "\n===============\n";
-	for (int x = 0; x < 3; x++)
-	{
-		std::cout << "\nTicket " << x + 1
-			<< "\n----------" << std::endl;
-		WorkTicketArray[x].ShowWorkTicket();
-	}
+	WorkTicket ticket3(1, "1", 1, 1, 2000, " ");
+	WorkTicket ticket4(1, "1", 1, 1, 2000, " ");
+	std::cout << "\nTicket 1:\n";
+	std::cin >> ticket3;
+	std::cout << "Ticket 2:\n";
+	std::cin >> ticket4;
+
+	std::cout << "\nAre the two tickets equal?: " << (ticket3 == ticket4) << std::endl;
+	ticket3 = ticket4;
+
+	std::cout << ticket4;
+
 }
